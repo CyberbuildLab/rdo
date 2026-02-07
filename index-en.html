@@ -1,0 +1,1657 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="resources/primer.css" media="screen"/>
+<link rel="stylesheet" href="resources/rec.css" media="screen"/>
+<link rel="stylesheet" href="resources/extra.css" media="screen"/>
+<link rel="stylesheet" href="resources/owl.css" media="screen"/>
+<link rel="stylesheet" href="resources/dark.css" media="(prefers-color-scheme: dark)"/>
+<link rel="stylesheet" href="resources/light.css" media="(prefers-color-scheme: light)"/>
+<link rel="stylesheet" href="resources/slider.css" media="screen"/>
+<meta name="color-scheme" content="dark light">
+<script type="module" src="resources/dark-mode-toggle.mjs"></script><div class="darkmode">
+	<dark-mode-toggle class="slider"></dark-mode-toggle>
+</div>
+ <title>Roof Damage Ontology</title>
+
+
+<!-- SCHEMA.ORG METADATA -->
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"TechArticle","url":"https://w3id.org/rdo#","image":"http://vowl.visualdataweb.org/webvowl/#iri=https://w3id.org/rdo#","name":"Roof Damage Ontology", "headline":"This ontology provides a semantic framework for representing roof condition inspection information, including roofs and roof pitches, inspections, orthophotos, and image-derived defect observations. It is designed to support structured documentation, querying, and interoperability within digital twin–based workflows for roof condition monitoring and maintenance, particularly in the context of existing and heritage buildings.", "dateReleased":"2026-02-06", "version":"0.5", "license":"https://creativecommons.org/licenses/by/4.0/", "author":[{"@type":"Person","name":"Frederic Bosche, University of Edinburgh"},{"@type":"Person","name":"Jiajun Li, University of Edinburgh"}]}</script>
+
+<script src="resources/jquery.js"></script> 
+<script src="resources/marked.min.js"></script> 
+    <script> 
+function loadHash() {
+  jQuery(".markdown").each(function(el){jQuery(this).after(marked.parse(jQuery(this).text())).remove()});
+	var hash = location.hash;
+	if($(hash).offset()!=null){
+	  $('html, body').animate({scrollTop: $(hash).offset().top}, 0);
+}
+	loadTOC();
+}
+function loadTOC(){
+	//process toc dynamically
+	  var t='<h2>Table of contents</h2><ul>';i = 1;j=0;
+	  jQuery(".list").each(function(){
+		if(jQuery(this).is('h2')){
+			if(j>0){
+				t+='</ul>';
+				j=0;
+			}
+			t+= '<li>'+i+'. <a href=#'+ jQuery(this).attr('id')+'>'+ jQuery(this).ignore("span").text()+'</a></li>';
+			i++;
+		}
+		if(jQuery(this).is('h3')){
+			if(j==0){
+				t+='<ul>';
+			}
+			j++;
+			t+= '<li>'+(i-1)+'.'+j+'. '+'<a href=#'+ jQuery(this).attr('id')+'>'+ jQuery(this).ignore("span").text()+'</a></li>';
+		}
+	  });
+	  t+='</ul>';
+	  $("#toc").html(t); 
+}
+$(function(){
+    loadHash();
+}); $.fn.ignore = function(sel){
+        return this.clone().find(sel||">*").remove().end();
+ }; 
+   </script> 
+  </head> 
+
+<body>
+<div class="container">
+<div class="head">
+<div style="float:right">language <a href="index-en.html"><b>en</b></a> </div>
+<h1>Roof Damage Ontology</h1>
+<h2>Release: 2026-02-06</h2>
+
+
+<dl>
+<dt>This version:</dt>
+<dd><a href="https://w3id.org/rdo/0.5">https://w3id.org/rdo/0.5</a></dd>
+<dt>Latest version:</dt>
+<dd><a href="https://w3id.org/rdo#">https://w3id.org/rdo#</a></dd>
+<dt>Revision:</dt>
+<dd>0.5</dd>
+<dt>Authors:</dt>
+<dd>Frederic Bosche, University of Edinburgh</dd><dd>Jiajun Li, University of Edinburgh</dd>
+
+<dt>Publisher:</dt>
+<dd>Cyberbuild, University of Edinburgh</dd>
+<dt>Imported Ontologies:</dt>
+<dd><a href="http://purl.org/spar/foaf">foaf</a></dd><dd><a href="https://pi.pauwel.be/voc/buildingelement">buildingelement</a></dd>
+
+<dt>Download serialization:</dt><dd><span><a href="rdo.jsonld" target="_blank"><img src="https://img.shields.io/badge/Format-JSON_LD-blue.svg" alt="JSON-LD" /></a> </span><span><a href="rdo.owl" target="_blank"><img src="https://img.shields.io/badge/Format-RDF/XML-blue.svg" alt="RDF/XML" /></a> </span><span><a href="rdo.nt" target="_blank"><img src="https://img.shields.io/badge/Format-N_Triples-blue.svg" alt="N-Triples" /></a> </span><span><a href="rdo.ttl" target="_blank"><img src="https://img.shields.io/badge/Format-TTL-blue.svg" alt="TTL" /></a> </span></dd><dt>License:</dt><dd><a href="https://creativecommons.org/licenses/by/4.0/" target="_blank"><img src="https://img.shields.io/badge/License-https://creativecommons.org/licenses/by/4.0/-blue.svg" alt="https://creativecommons.org/licenses/by/4.0/" /></a>
+</dd><dt>Visualization:</dt><dd><a href="webvowl/index.html#" target="_blank"><img src="https://img.shields.io/badge/Visualize_with-WebVowl-blue.svg" alt="Visualize with WebVowl" /></a></dd>
+<!-- <dt>Evaluation:</dt><dd><a href="OOPSevaluation/oopsEval.html#" target="_blank"><img src="https://img.shields.io/badge/Evaluate_with-OOPS! (OntOlogy Pitfall Scanner!)-blue.svg" alt="Evaluate with OOPS!" /></a></dd> --><dt>Cite as:</dt>
+<dd>Frederic Bosche, University of Edinburgh, Jiajun Li, University of Edinburgh. Roof Damage Ontology. Revision: 0.5. Retrieved from: https://w3id.org/rdo/0.5</dd>
+</dl>
+
+<hr/>
+</div>
+<div class="status">
+<div>
+<span>Ontology Specification Draft</span>
+</div>
+</div>     <div id="abstract"><h2>Abstract</h2><span class="markdown">
+This ontology provides a semantic framework for representing roof condition inspection information, including roofs and roof pitches, inspections, orthophotos, and image-derived defect observations. It is designed to support structured documentation, querying, and interoperability within digital twin–based workflows for roof condition monitoring and maintenance, particularly in the context of existing and heritage buildings.</span>
+</div>
+<div id="toc"></div>  
+
+<!--DESCRIPTION SECTION-->
+    <div id="description"><h2 id="desc" class="list">Roof Damage Ontology: Description <span class="backlink"> back to <a href="#toc">ToC</a></span></h2>
+
+<span class="markdown">This ontology provides a semantic framework for representing roof condition inspection information, including roofs and roof pitches, inspections, orthophotos, and image-derived defect observations. It is designed to support structured documentation, querying, and interoperability within digital twin–based workflows for roof condition monitoring and maintenance, particularly in the context of existing and heritage buildings.</span></div>
+   
+
+<!--CROSSREF SECTION-->
+   <div id="crossref"><h2 id="crossreference" class="list">Cross-reference for Roof Damage Ontology classes, object properties and data properties <span class="backlink"> back to <a href="#toc">ToC</a></span></h2>
+This section provides details for each class and property defined by Roof Damage Ontology.
+<div xmlns:widoco="https://w3id.org/widoco/vocab#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="classes">
+ <h3 id="classes-headline" class="list">Classes</h3>
+ <ul class="hlist">
+  <li><a href="#http://purl.org/dc/terms/AgentClass" title="http://purl.org/dc/terms/AgentClass"> <span>Agent Class</span> </a></li>
+  <li><a href="#Damage_Inspection_Observation" title="https://w3id.org/rdo#Damage_Inspection_Observation">Damage Inspection Observation</a></li>
+  <li><a href="#Damage_Image_Location" title="https://w3id.org/rdo#Damage_Image_Location">Damage Observation Image Location</a></li>
+  <li><a href="#http://purl.org/dc/terms/FileFormat" title="http://purl.org/dc/terms/FileFormat"> <span>File Format</span> </a></li>
+  <li><a href="#http://xmlns.com/foaf/0.1/Image" title="http://xmlns.com/foaf/0.1/Image"> <span>Image</span> </a></li>
+  <li><a href="#Image" title="https://w3id.org/rdo#Image"> <span>Image</span> </a></li>
+  <li><a href="#http://purl.org/dc/terms/Jurisdiction" title="http://purl.org/dc/terms/Jurisdiction"> <span>Jurisdiction</span> </a></li>
+  <li><a href="#http://purl.org/dc/terms/LicenseDocument" title="http://purl.org/dc/terms/LicenseDocument"> <span>License Document</span> </a></li>
+  <li><a href="#http://purl.org/dc/terms/Location" title="http://purl.org/dc/terms/Location"> <span>Location</span> </a></li>
+  <li><a href="#http://purl.org/dc/terms/MediaType" title="http://purl.org/dc/terms/MediaType"> <span>Media Type</span> </a></li>
+  <li><a href="#http://webprotege.stanford.edu/RCY2aGVeb8KpRCsVrf5s8AD" title="http://webprotege.stanford.edu/RCY2aGVeb8KpRCsVrf5s8AD">Orthophoto</a></li>
+  <li><a href="#http://purl.org/dc/terms/PeriodOfTime" title="http://purl.org/dc/terms/PeriodOfTime"> <span>Period of Time</span> </a></li>
+  <li><a href="#http://purl.org/dc/terms/PhysicalMedium" title="http://purl.org/dc/terms/PhysicalMedium"> <span>Physical Medium</span> </a></li>
+  <li><a href="#http://webprotege.stanford.edu/RCiwm3pFp97sUUNZMKSqwg7" title="http://webprotege.stanford.edu/RCiwm3pFp97sUUNZMKSqwg7">Roof Inspection</a></li>
+  <li><a href="#http://webprotege.stanford.edu/RCsOXjQhDvzdCqC92ncCBu" title="http://webprotege.stanford.edu/RCsOXjQhDvzdCqC92ncCBu">Roof Pitch</a></li>
+  <li><a href="#http://purl.org/dc/terms/SizeOrDuration" title="http://purl.org/dc/terms/SizeOrDuration"> <span>Size or Duration</span> </a></li>
+  <li><a href="#http://webprotege.stanford.edu/RkC6OzV1rmYsTeyuPAyaTf" title="http://webprotege.stanford.edu/RkC6OzV1rmYsTeyuPAyaTf">Slate Biological Growth</a></li>
+  <li><a href="#http://webprotege.stanford.edu/R89LStemoQ1MqtJ4u3wNnCc" title="http://webprotege.stanford.edu/R89LStemoQ1MqtJ4u3wNnCc">Slate Structural Defect</a></li>
+ </ul>
+ <div class="entity" id="http://purl.org/dc/terms/AgentClass">
+  <h3>Agent Class<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://purl.org/dc/terms/AgentClass</p>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="http://www.w3.org/2000/01/rdf-schema#Class" target="_blank" title="http://www.w3.org/2000/01/rdf-schema#Class">Class</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    has members
+   </dt>
+   <dd>
+    <a href="#http://purl.org/dc/terms/Agent" title="http://purl.org/dc/terms/Agent">Agent</a> <sup class="type-ni" title="named individual">ni</sup>
+   </dd>
+   <dt>
+    is also defined as
+   </dt>
+   <dd>
+    <a href="#http://purl.org/dc/terms/AgentClass">named individual</a>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="Damage_Inspection_Observation">
+  <h3>Damage Inspection Observation<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/rdo#Damage_Inspection_Observation</p>
+  <div class="comment">
+   <span class="markdown">A Damage Inspection Observation represents an observation made during an inspection indicating the presence of a potential damage.</span>
+  </div>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="https://w3id.org/dot#Damage" target="_blank" title="https://w3id.org/dot#Damage">Damage</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    is in domain of
+   </dt>
+   <dd>
+    <a href="#has_Location_in" title="https://w3id.org/rdo#has_Location_in">has Location In</a> <sup class="type-op" title="object property">op</sup>
+   </dd>
+   <dt>
+    is in range of
+   </dt>
+   <dd>
+    <a href="#HasAppearance" title="https://w3id.org/rdo#HasAppearance">has Inspection Observation</a> <sup class="type-op" title="object property">op</sup>, <a href="#locates_Damage" title="https://w3id.org/rdo#locates_Damage">locates</a> <sup class="type-op" title="object property">op</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="Damage_Image_Location">
+  <h3>Damage Observation Image Location<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/rdo#Damage_Image_Location</p>
+  <div class="comment">
+   <span class="markdown">A Damage Observation Image Location represents the spatial localisation of a detected or observed damage within an image or orthophoto.</span>
+  </div>
+  <dl class="description">
+   <dt>
+    is in domain of
+   </dt>
+   <dd>
+    <a href="#has_Image" title="https://w3id.org/rdo#has_Image">has Image</a> <sup class="type-op" title="object property">op</sup>, <a href="#locates_Damage" title="https://w3id.org/rdo#locates_Damage">locates</a> <sup class="type-op" title="object property">op</sup>
+   </dd>
+   <dt>
+    is in range of
+   </dt>
+   <dd>
+    <a href="#has_Damage_Observation_Location" title="https://w3id.org/rdo#has_Damage_Observation_Location">has Damage Observation Location</a> <sup class="type-op" title="object property">op</sup>, <a href="#has_Location_in" title="https://w3id.org/rdo#has_Location_in">has Location In</a> <sup class="type-op" title="object property">op</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="http://purl.org/dc/terms/FileFormat">
+  <h3>File Format<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://purl.org/dc/terms/FileFormat</p>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="#http://purl.org/dc/terms/MediaType" title="http://purl.org/dc/terms/MediaType">Media Type</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    is also defined as
+   </dt>
+   <dd>
+    <a href="#http://purl.org/dc/terms/FileFormat">named individual</a>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="http://xmlns.com/foaf/0.1/Image">
+  <h3>Image<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://xmlns.com/foaf/0.1/Image</p>
+  <dl class="description">
+   <dt>
+    is equivalent to
+   </dt>
+   <dd>
+    <a href="#Image" title="https://w3id.org/rdo#Image">Image</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="Image">
+  <h3>Image<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/rdo#Image</p>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="https://w3id.org/dot#ExternalResource" target="_blank" title="https://w3id.org/dot#ExternalResource">External Resource</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    has sub-classes
+   </dt>
+   <dd>
+    <a href="#http://webprotege.stanford.edu/RCY2aGVeb8KpRCsVrf5s8AD" title="http://webprotege.stanford.edu/RCY2aGVeb8KpRCsVrf5s8AD">Orthophoto</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    is in domain of
+   </dt>
+   <dd>
+    <a href="#has_Damage_Observation_Location" title="https://w3id.org/rdo#has_Damage_Observation_Location">has Damage Observation Location</a> <sup class="type-op" title="object property">op</sup>, <a href="#hasResolution" title="https://w3id.org/rdo#hasResolution">resolution</a> <sup class="type-dp" title="data property">dp</sup>
+   </dd>
+   <dt>
+    is in range of
+   </dt>
+   <dd>
+    <a href="#has_Image" title="https://w3id.org/rdo#has_Image">has Image</a> <sup class="type-op" title="object property">op</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="http://purl.org/dc/terms/Jurisdiction">
+  <h3>Jurisdiction<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://purl.org/dc/terms/Jurisdiction</p>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="http://purl.org/dc/terms/LocationPeriodOrJurisdiction" target="_blank" title="http://purl.org/dc/terms/LocationPeriodOrJurisdiction">Location, Period, or Jurisdiction</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    is also defined as
+   </dt>
+   <dd>
+    <a href="#http://purl.org/dc/terms/Jurisdiction">named individual</a>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="http://purl.org/dc/terms/LicenseDocument">
+  <h3>License Document<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://purl.org/dc/terms/LicenseDocument</p>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="http://purl.org/dc/terms/RightsStatement" target="_blank" title="http://purl.org/dc/terms/RightsStatement">Rights Statement</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    is also defined as
+   </dt>
+   <dd>
+    <a href="#http://purl.org/dc/terms/LicenseDocument">named individual</a>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="http://purl.org/dc/terms/Location">
+  <h3>Location<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://purl.org/dc/terms/Location</p>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="http://purl.org/dc/terms/LocationPeriodOrJurisdiction" target="_blank" title="http://purl.org/dc/terms/LocationPeriodOrJurisdiction">Location, Period, or Jurisdiction</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    is also defined as
+   </dt>
+   <dd>
+    <a href="#http://purl.org/dc/terms/Location">named individual</a>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="http://purl.org/dc/terms/MediaType">
+  <h3>Media Type<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://purl.org/dc/terms/MediaType</p>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="http://purl.org/dc/terms/MediaTypeOrExtent" target="_blank" title="http://purl.org/dc/terms/MediaTypeOrExtent">Media Type or Extent</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    has sub-classes
+   </dt>
+   <dd>
+    <a href="#http://purl.org/dc/terms/FileFormat" title="http://purl.org/dc/terms/FileFormat">File Format</a> <sup class="type-c" title="class">c</sup>, <a href="#http://purl.org/dc/terms/PhysicalMedium" title="http://purl.org/dc/terms/PhysicalMedium">Physical Medium</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    is also defined as
+   </dt>
+   <dd>
+    <a href="#http://purl.org/dc/terms/MediaType">named individual</a>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="http://webprotege.stanford.edu/RCY2aGVeb8KpRCsVrf5s8AD">
+  <h3>Orthophoto<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://webprotege.stanford.edu/RCY2aGVeb8KpRCsVrf5s8AD</p>
+  <div class="comment">
+   <span class="markdown">An Orthophoto is a geometrically corrected image produced from photogrammetric processing, providing a uniform scale representation of roof surfaces and serving as spatial evidence for damage documentation.</span>
+  </div>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="#Image" title="https://w3id.org/rdo#Image">Image</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="http://purl.org/dc/terms/PeriodOfTime">
+  <h3>Period of Time<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://purl.org/dc/terms/PeriodOfTime</p>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="http://purl.org/dc/terms/LocationPeriodOrJurisdiction" target="_blank" title="http://purl.org/dc/terms/LocationPeriodOrJurisdiction">Location, Period, or Jurisdiction</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    is also defined as
+   </dt>
+   <dd>
+    <a href="#http://purl.org/dc/terms/PeriodOfTime">named individual</a>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="http://purl.org/dc/terms/PhysicalMedium">
+  <h3>Physical Medium<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://purl.org/dc/terms/PhysicalMedium</p>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="#http://purl.org/dc/terms/MediaType" title="http://purl.org/dc/terms/MediaType">Media Type</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    is also defined as
+   </dt>
+   <dd>
+    <a href="#http://purl.org/dc/terms/PhysicalMedium">named individual</a>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="http://webprotege.stanford.edu/RCiwm3pFp97sUUNZMKSqwg7">
+  <h3>Roof Inspection<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://webprotege.stanford.edu/RCiwm3pFp97sUUNZMKSqwg7</p>
+  <div class="comment">
+   <span class="markdown">A Roof Inspection is a specialised inspection activity focusing on the condition assessment of roof elements, during which visual observations, images, and damage documentation are produced</span>
+  </div>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="https://w3id.org/dot#Inspection" target="_blank" title="https://w3id.org/dot#Inspection">Inspection</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="http://webprotege.stanford.edu/RCsOXjQhDvzdCqC92ncCBu">
+  <h3>Roof Pitch<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://webprotege.stanford.edu/RCsOXjQhDvzdCqC92ncCBu</p>
+  <div class="comment">
+   <span class="markdown">A Roof Pitch is a subdivision of a roof used as a spatial unit for inspection and damage documentation.</span>
+  </div>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="https://pi.pauwel.be/voc/buildingelement#BuildingElementPart" target="_blank" title="https://pi.pauwel.be/voc/buildingelement#BuildingElementPart">Building Element Part</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    is in domain of
+   </dt>
+   <dd>
+    <a href="#pitch_angle" title="https://w3id.org/rdo#pitch_angle">Pitch angle</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#exposure_level" title="https://w3id.org/rdo#exposure_level">exposure level</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#urn:webprotege:ontology:dc88ba2e-7e28-4c89-8637-655a2b9ad945#belongsto" title="urn:webprotege:ontology:dc88ba2e-7e28-4c89-8637-655a2b9ad945#belongsto">is Pitch Of</a> <sup class="type-op" title="object property">op</sup>, <a href="#orientation" title="https://w3id.org/rdo#orientation">orientation</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#relative_position" title="https://w3id.org/rdo#relative_position">relative position</a> <sup class="type-dp" title="data property">dp</sup>
+   </dd>
+   <dt>
+    is in range of
+   </dt>
+   <dd>
+    <a href="#http://webprotege.stanford.edu/RkSo6PclimyTVhUedJeJUk" title="http://webprotege.stanford.edu/RkSo6PclimyTVhUedJeJUk">has Pitch</a> <sup class="type-op" title="object property">op</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="http://purl.org/dc/terms/SizeOrDuration">
+  <h3>Size or Duration<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://purl.org/dc/terms/SizeOrDuration</p>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="http://purl.org/dc/terms/MediaTypeOrExtent" target="_blank" title="http://purl.org/dc/terms/MediaTypeOrExtent">Media Type or Extent</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+   <dt>
+    is also defined as
+   </dt>
+   <dd>
+    <a href="#http://purl.org/dc/terms/SizeOrDuration">named individual</a>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="http://webprotege.stanford.edu/RkC6OzV1rmYsTeyuPAyaTf">
+  <h3>Slate Biological Growth<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://webprotege.stanford.edu/RkC6OzV1rmYsTeyuPAyaTf</p>
+  <div class="comment">
+   <span class="markdown">Slate Biological Growth represents biologically induced surface conditions observed on roof slates, such as algae, moss, and lichen. These forms of growth are not necessarily defects in themselves, but are indicative of persistent moisture, local environmental conditions, and reduced drying potential. The presence and distribution of biological growth may signal emerging risks, particularly at junctions or areas prone to water retention, and therefore support interpretation of roof condition and prioritisation of further inspection.</span>
+  </div>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="https://w3id.org/dot#ClassifiedDamage" target="_blank" title="https://w3id.org/dot#ClassifiedDamage">Classified Damage</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+  </dl>
+ </div>
+ <div class="entity" id="http://webprotege.stanford.edu/R89LStemoQ1MqtJ4u3wNnCc">
+  <h3>Slate Structural Defect<sup class="type-c" title="class">c</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://webprotege.stanford.edu/R89LStemoQ1MqtJ4u3wNnCc</p>
+  <div class="comment">
+   <span class="markdown">A Slate Structural Defect represents a physical damage potentially affecting the integrity or position of a roof slate, such as broken, displaced, or missing slate.</span>
+  </div>
+  <dl class="description">
+   <dt>
+    has super-classes
+   </dt>
+   <dd>
+    <a href="https://w3id.org/dot#ClassifiedDamage" target="_blank" title="https://w3id.org/dot#ClassifiedDamage">Classified Damage</a> <sup class="type-c" title="class">c</sup>
+   </dd>
+  </dl>
+ </div>
+</div><div xmlns:widoco="https://w3id.org/widoco/vocab#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="objectproperties">
+ <h3 id="properties" class="list">Object Properties</h3>
+ <ul class="hlist">
+  <li><a href="#affect_Product" title="https://w3id.org/rdo#affect_Product">affects Product</a></li>
+  <li><a href="#https://w3id.org/dot#documentationFromInspection" title="https://w3id.org/dot#documentationFromInspection"> <span>documentation From Inspection</span> </a></li>
+  <li><a href="#has_Damage_Observation_Location" title="https://w3id.org/rdo#has_Damage_Observation_Location">has Damage Observation Location</a></li>
+  <li><a href="#has_Image" title="https://w3id.org/rdo#has_Image">has Image</a></li>
+  <li><a href="#HasAppearance" title="https://w3id.org/rdo#HasAppearance">has Inspection Observation</a></li>
+  <li><a href="#has_Location_in" title="https://w3id.org/rdo#has_Location_in">has Location In</a></li>
+  <li><a href="#http://webprotege.stanford.edu/RkSo6PclimyTVhUedJeJUk" title="http://webprotege.stanford.edu/RkSo6PclimyTVhUedJeJUk">has Pitch</a></li>
+  <li><a href="#Is_Composed_Of" title="https://w3id.org/rdo#Is_Composed_Of">is Composed Of</a></li>
+  <li><a href="#is_Inspection_Observation_Of" title="https://w3id.org/rdo#is_Inspection_Observation_Of">is Inspection Observation Of</a></li>
+  <li><a href="#urn:webprotege:ontology:dc88ba2e-7e28-4c89-8637-655a2b9ad945#belongsto" title="urn:webprotege:ontology:dc88ba2e-7e28-4c89-8637-655a2b9ad945#belongsto">is Pitch Of</a></li>
+  <li><a href="#locates_Damage" title="https://w3id.org/rdo#locates_Damage">locates</a></li>
+ </ul>
+ <div class="entity" id="affect_Product">
+  <h3>affects Product<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/rdo#affect_Product</p>
+  <div class="comment">
+   <span class="markdown">Relationship between a damage and the product it affects.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="https://w3id.org/dot#Damage" target="_blank" title="https://w3id.org/dot#Damage">Damage</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="https://schema.org/Product" target="_blank" title="https://schema.org/Product">Product</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="https://w3id.org/dot#documentationFromInspection">
+  <h3>documentation From Inspection<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/dot#documentationFromInspection</p>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="https://w3id.org/dot#Documentation" target="_blank" title="https://w3id.org/dot#Documentation">Documentation</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="https://w3id.org/dot#Inspection" target="_blank" title="https://w3id.org/dot#Inspection">Inspection</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="has_Damage_Observation_Location">
+  <h3>has Damage Observation Location<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/rdo#has_Damage_Observation_Location</p>
+  <div class="comment">
+   <span class="markdown">Relationship between an Image and one or more Damage Observation Image Locations recorded within that image. This property is the inverse of has Image and enables queries from an image to the damage observation locations it contains.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#Image" title="https://w3id.org/rdo#Image">Image</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="#Damage_Image_Location" title="https://w3id.org/rdo#Damage_Image_Location">Damage Observation Image Location</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     is inverse of
+    </dt>
+    <dd>
+     <a href="#has_Image" title="https://w3id.org/rdo#has_Image">has Image</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="has_Image">
+  <h3>has Image<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/rdo#has_Image</p>
+  <div class="comment">
+   <span class="markdown">Relationship between a damage image location and the corresponding image.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#Damage_Image_Location" title="https://w3id.org/rdo#Damage_Image_Location">Damage Observation Image Location</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="#Image" title="https://w3id.org/rdo#Image">Image</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     is inverse of
+    </dt>
+    <dd>
+     <a href="#has_Damage_Observation_Location" title="https://w3id.org/rdo#has_Damage_Observation_Location">has Damage Observation Location</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="HasAppearance">
+  <h3>has Inspection Observation<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/rdo#HasAppearance</p>
+  <div class="comment">
+   <span class="markdown">Relationship between a damage presence and the corresponding inspection observation.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="https://w3id.org/dot#Damage" target="_blank" title="https://w3id.org/dot#Damage">Damage</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="#Damage_Inspection_Observation" title="https://w3id.org/rdo#Damage_Inspection_Observation">Damage Inspection Observation</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     is inverse of
+    </dt>
+    <dd>
+     <a href="#is_Inspection_Observation_Of" title="https://w3id.org/rdo#is_Inspection_Observation_Of">is Inspection Observation Of</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="has_Location_in">
+  <h3>has Location In<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/rdo#has_Location_in</p>
+  <div class="comment">
+   <span class="markdown">Links a Damage Inspection Observation to the corresponding Damage Observation Image Location where it is spatially located within visual documentation. This property is the inverse of locates and enables queries from inspection observations to their associated image locations.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#Damage_Inspection_Observation" title="https://w3id.org/rdo#Damage_Inspection_Observation">Damage Inspection Observation</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="#Damage_Image_Location" title="https://w3id.org/rdo#Damage_Image_Location">Damage Observation Image Location</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     is inverse of
+    </dt>
+    <dd>
+     <a href="#locates_Damage" title="https://w3id.org/rdo#locates_Damage">locates</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="http://webprotege.stanford.edu/RkSo6PclimyTVhUedJeJUk">
+  <h3>has Pitch<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://webprotege.stanford.edu/RkSo6PclimyTVhUedJeJUk</p>
+  <div class="comment">
+   <span class="markdown">Represents a part–whole relationship where a roof consists of one or more pitches. Conceptually aligned with standard part–whole relations (e.g. BFO:has_part), without importing upper-level ontologies.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="https://pi.pauwel.be/voc/buildingelement#Roof" target="_blank" title="https://pi.pauwel.be/voc/buildingelement#Roof">Roof</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="#http://webprotege.stanford.edu/RCsOXjQhDvzdCqC92ncCBu" title="http://webprotege.stanford.edu/RCsOXjQhDvzdCqC92ncCBu">Roof Pitch</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     is inverse of
+    </dt>
+    <dd>
+     <a href="#urn:webprotege:ontology:dc88ba2e-7e28-4c89-8637-655a2b9ad945#belongsto" title="urn:webprotege:ontology:dc88ba2e-7e28-4c89-8637-655a2b9ad945#belongsto">is Pitch Of</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="Is_Composed_Of">
+  <h3>is Composed Of<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/rdo#Is_Composed_Of</p>
+  <div class="comment">
+   <span class="markdown">Relationship between classified damage instances forming a composite classified damage.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="https://w3id.org/dot#Damage" target="_blank" title="https://w3id.org/dot#Damage">Damage</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="https://w3id.org/dot#Damage" target="_blank" title="https://w3id.org/dot#Damage">Damage</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="is_Inspection_Observation_Of">
+  <h3>is Inspection Observation Of<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/rdo#is_Inspection_Observation_Of</p>
+  <div class="comment">
+   <span class="markdown">Relationship between an inspection observation and the corresponding damage entity</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     is inverse of
+    </dt>
+    <dd>
+     <a href="#HasAppearance" title="https://w3id.org/rdo#HasAppearance">has Inspection Observation</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="urn:webprotege:ontology:dc88ba2e-7e28-4c89-8637-655a2b9ad945#belongsto">
+  <h3>is Pitch Of<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> urn:webprotege:ontology:dc88ba2e-7e28-4c89-8637-655a2b9ad945#belongsto</p>
+  <div class="comment">
+   <span class="markdown">Relationship between a pitch and the roof it belongs to.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#http://webprotege.stanford.edu/RCsOXjQhDvzdCqC92ncCBu" title="http://webprotege.stanford.edu/RCsOXjQhDvzdCqC92ncCBu">Roof Pitch</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="https://pi.pauwel.be/voc/buildingelement#Roof" target="_blank" title="https://pi.pauwel.be/voc/buildingelement#Roof">Roof</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     is inverse of
+    </dt>
+    <dd>
+     <a href="#http://webprotege.stanford.edu/RkSo6PclimyTVhUedJeJUk" title="http://webprotege.stanford.edu/RkSo6PclimyTVhUedJeJUk">has Pitch</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="locates_Damage">
+  <h3>locates<sup class="type-op" title="object property">op</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/rdo#locates_Damage</p>
+  <div class="comment">
+   <span class="markdown">Represents the relationship between a damage image location (e.g. a region on an orthophoto) and the damage inspection observation it refers to. This allows a detected damage observed during an inspection to be spatially located within visual documentation.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#Damage_Image_Location" title="https://w3id.org/rdo#Damage_Image_Location">Damage Observation Image Location</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="#Damage_Inspection_Observation" title="https://w3id.org/rdo#Damage_Inspection_Observation">Damage Inspection Observation</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     is inverse of
+    </dt>
+    <dd>
+     <a href="#has_Location_in" title="https://w3id.org/rdo#has_Location_in">has Location In</a> <sup class="type-op" title="object property">op</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+</div><div xmlns:widoco="https://w3id.org/widoco/vocab#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="dataproperties">
+ <h3 id="dataproperties-headline" class="list">Data Properties</h3>
+ <ul class="hlist">
+  <li><a href="#http://purl.org/dc/terms/alternative" title="http://purl.org/dc/terms/alternative"> <span>Alternative Title</span> </a></li>
+  <li><a href="#analysis_type" title="https://w3id.org/rdo#analysis_type">analysis type</a></li>
+  <li><a href="#http://purl.org/dc/terms/bibliographicCitation" title="http://purl.org/dc/terms/bibliographicCitation"> <span>Bibliographic Citation</span> </a></li>
+  <li><a href="#climate_context" title="https://w3id.org/rdo#climate_context">climate context</a></li>
+  <li><a href="#hasConditionLevel" title="https://w3id.org/rdo#hasConditionLevel">condition level</a></li>
+  <li><a href="#http://webprotege.stanford.edu/RB3bxfNs0KGdXacZxMLhjzb" title="http://webprotege.stanford.edu/RB3bxfNs0KGdXacZxMLhjzb">confidence</a></li>
+  <li><a href="#Caveat" title="https://w3id.org/rdo#Caveat">data acquisition type</a></li>
+  <li><a href="#http://purl.org/dc/terms/date" title="http://purl.org/dc/terms/date"> <span>Date</span> </a></li>
+  <li><a href="#http://purl.org/dc/terms/dateAccepted" title="http://purl.org/dc/terms/dateAccepted"> <span>Date Accepted</span> </a></li>
+  <li><a href="#http://purl.org/dc/terms/available" title="http://purl.org/dc/terms/available"> <span>Date Available</span> </a></li>
+  <li><a href="#http://purl.org/dc/terms/dateCopyrighted" title="http://purl.org/dc/terms/dateCopyrighted"> <span>Date Copyrighted</span> </a></li>
+  <li><a href="#http://purl.org/dc/terms/created" title="http://purl.org/dc/terms/created"> <span>Date Created</span> </a></li>
+  <li><a href="#http://purl.org/dc/terms/issued" title="http://purl.org/dc/terms/issued"> <span>Date Issued</span> </a></li>
+  <li><a href="#http://purl.org/dc/terms/issued" title="http://purl.org/dc/terms/issued"> <span>Date Issued</span> </a></li>
+  <li><a href="#http://purl.org/dc/terms/modified" title="http://purl.org/dc/terms/modified"> <span>Date Modified</span> </a></li>
+  <li><a href="#http://purl.org/dc/terms/dateSubmitted" title="http://purl.org/dc/terms/dateSubmitted"> <span>Date Submitted</span> </a></li>
+  <li><a href="#http://purl.org/dc/terms/valid" title="http://purl.org/dc/terms/valid"> <span>Date Valid</span> </a></li>
+  <li><a href="#hasDefectType" title="https://w3id.org/rdo#hasDefectType">Defect type</a></li>
+  <li><a href="#environmental_and_climate_context" title="https://w3id.org/rdo#environmental_and_climate_context">environmental and climate context</a></li>
+  <li><a href="#environmental_context" title="https://w3id.org/rdo#environmental_context">environmental context</a></li>
+  <li><a href="#exposure_level" title="https://w3id.org/rdo#exposure_level">exposure level</a></li>
+  <li><a href="#http://purl.org/dc/terms/identifier" title="http://purl.org/dc/terms/identifier"> <span>Identifier</span> </a></li>
+  <li><a href="#junction_context" title="https://w3id.org/rdo#junction_context">junction context</a></li>
+  <li><a href="#junction_type" title="https://w3id.org/rdo#junction_type">junction type</a></li>
+  <li><a href="#orientation" title="https://w3id.org/rdo#orientation">orientation</a></li>
+  <li><a href="#pitch_angle" title="https://w3id.org/rdo#pitch_angle">Pitch angle</a></li>
+  <li><a href="#relative_position" title="https://w3id.org/rdo#relative_position">relative position</a></li>
+  <li><a href="#hasRepairStatus" title="https://w3id.org/rdo#hasRepairStatus">repair status</a></li>
+  <li><a href="#hasResolution" title="https://w3id.org/rdo#hasResolution">resolution</a></li>
+  <li><a href="#roof_build_up" title="https://w3id.org/rdo#roof_build_up">Roof build-up</a></li>
+  <li><a href="#http://purl.org/dc/terms/title" title="http://purl.org/dc/terms/title"> <span>Title</span> </a></li>
+  <li><a href="#hasX" title="https://w3id.org/rdo#hasX">xyz</a></li>
+ </ul>
+ <div class="entity" id="http://purl.org/dc/terms/alternative">
+  <h3>Alternative Title<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://purl.org/dc/terms/alternative</p>
+  <div class="description">
+   <dl>
+    <dt>
+     has super-properties
+    </dt>
+    <dd>
+     <a href="#http://purl.org/dc/terms/title" title="http://purl.org/dc/terms/title">Title</a> <sup class="type-dp" title="data property">dp</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2000/01/rdf-schema#Literal" target="_blank" title="http://www.w3.org/2000/01/rdf-schema#Literal">Literal</a>
+    </dd>
+    <dt>
+     is also defined as
+    </dt>
+    <dd>
+     <a href="#http://purl.org/dc/terms/alternative">annotation property</a>, <a href="#http://purl.org/dc/terms/alternative">named individual</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="analysis_type">
+  <h3>analysis type<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/rdo#analysis_type</p>
+  <div class="comment">
+   <span class="markdown">Specifies the type of analysis applied to inspection data, such as AI-assisted image analysis, manual expert assessment, or hybrid approaches. This property clarifies how inspection findings and defect classifications were produced, and helps to make potential limitations of the inspection results explicit.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="https://w3id.org/dot#Inspection" target="_blank" title="https://w3id.org/dot#Inspection">Inspection</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#string" target="_blank" title="http://www.w3.org/2001/XMLSchema#string">string</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="http://purl.org/dc/terms/bibliographicCitation">
+  <h3>Bibliographic Citation<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://purl.org/dc/terms/bibliographicCitation</p>
+  <div class="description">
+   <dl>
+    <dt>
+     has super-properties
+    </dt>
+    <dd>
+     <a href="#http://purl.org/dc/terms/identifier" title="http://purl.org/dc/terms/identifier">Identifier</a> <sup class="type-dp" title="data property">dp</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2000/01/rdf-schema#Literal" target="_blank" title="http://www.w3.org/2000/01/rdf-schema#Literal">Literal</a>
+    </dd>
+    <dt>
+     is also defined as
+    </dt>
+    <dd>
+     <a href="#http://purl.org/dc/terms/bibliographicCitation">annotation property</a>, <a href="#http://purl.org/dc/terms/bibliographicCitation">named individual</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="climate_context">
+  <h3>climate context<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/rdo#climate_context</p>
+  <div class="comment">
+   <span class="markdown">Indicates the broader climatic setting relevant to the building (e.g., Scottish, English, inland, coastal), reflecting long-term exposure conditions such as rainfall patterns, wind-driven rain, freeze–thaw cycles, and humidity. Climate context supports comparison across inspections and helps explain differing deterioration rates observed on similar roof constructions.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has super-properties
+    </dt>
+    <dd>
+     <a href="#environmental_and_climate_context" title="https://w3id.org/rdo#environmental_and_climate_context">environmental and climate context</a> <sup class="type-dp" title="data property">dp</sup>
+    </dd>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="https://schema.org/Product" target="_blank" title="https://schema.org/Product">Product</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#string" target="_blank" title="http://www.w3.org/2001/XMLSchema#string">string</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="hasConditionLevel">
+  <h3>condition level<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/rdo#hasConditionLevel</p>
+  <div class="comment">
+   <span class="markdown">Represents the assessed condition rating of a building element (e.g., roof or roof pitch), derived from visual inspection and used to indicate the severity of deterioration and the urgency of maintenance or repair. The value typically follows standardised building survey rating systems, such as the RICS Condition Ratings (1–3, traffic light system) or equivalent condition indices (e.g., numerical scales indicating maintenance, restoration, or replacement needs).</span>
+  </div>
+  <div class="description">
+   <p><strong>has characteristics: </strong> functional</p>
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="https://schema.org/Product" target="_blank" title="https://schema.org/Product">Product</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#string" target="_blank" title="http://www.w3.org/2001/XMLSchema#string">string</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="http://webprotege.stanford.edu/RB3bxfNs0KGdXacZxMLhjzb">
+  <h3>confidence<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://webprotege.stanford.edu/RB3bxfNs0KGdXacZxMLhjzb</p>
+  <div class="comment">
+   <span class="markdown">The confidence associated with an observation or assessment of a damage.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has super-properties
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2002/07/owl#topDataProperty" target="_blank" title="http://www.w3.org/2002/07/owl#topDataProperty">top Data Property</a> <sup class="type-dp" title="data property">dp</sup>
+    </dd>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="https://w3id.org/dot#Damage" target="_blank" title="https://w3id.org/dot#Damage">Damage</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#decimal" target="_blank" title="http://www.w3.org/2001/XMLSchema#decimal">decimal</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="Caveat">
+  <h3>data acquisition type<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/rdo#Caveat</p>
+  <div class="comment">
+   <span class="markdown">Specifies how inspection data were acquired, describing the data acquisition method used during an inspection (e.g. UAV-based photogrammetry, ground-based visual inspection, handheld photography, or mixed approaches). This property supports interpretation of inspection outcomes by making data provenance explicit.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="https://w3id.org/dot#Inspection" target="_blank" title="https://w3id.org/dot#Inspection">Inspection</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#string" target="_blank" title="http://www.w3.org/2001/XMLSchema#string">string</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="http://purl.org/dc/terms/date">
+  <h3>Date<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://purl.org/dc/terms/date</p>
+  <div class="description">
+   <dl>
+    <dt>
+     has sub-properties
+    </dt>
+    <dd>
+     <a href="#http://purl.org/dc/terms/dateAccepted" title="http://purl.org/dc/terms/dateAccepted">Date Accepted</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#http://purl.org/dc/terms/available" title="http://purl.org/dc/terms/available">Date Available</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#http://purl.org/dc/terms/dateCopyrighted" title="http://purl.org/dc/terms/dateCopyrighted">Date Copyrighted</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#http://purl.org/dc/terms/created" title="http://purl.org/dc/terms/created">Date Created</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#http://purl.org/dc/terms/issued" title="http://purl.org/dc/terms/issued">Date Issued</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#http://purl.org/dc/terms/modified" title="http://purl.org/dc/terms/modified">Date Modified</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#http://purl.org/dc/terms/dateSubmitted" title="http://purl.org/dc/terms/dateSubmitted">Date Submitted</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#http://purl.org/dc/terms/valid" title="http://purl.org/dc/terms/valid">Date Valid</a> <sup class="type-dp" title="data property">dp</sup>
+    </dd>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="https://w3id.org/dot#Inspection" target="_blank" title="https://w3id.org/dot#Inspection">Inspection</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2000/01/rdf-schema#Literal" target="_blank" title="http://www.w3.org/2000/01/rdf-schema#Literal">Literal</a>
+    </dd>
+    <dt>
+     is also defined as
+    </dt>
+    <dd>
+     <a href="#http://purl.org/dc/terms/date">named individual</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="http://purl.org/dc/terms/dateAccepted">
+  <h3>Date Accepted<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://purl.org/dc/terms/dateAccepted</p>
+  <div class="description">
+   <dl>
+    <dt>
+     has super-properties
+    </dt>
+    <dd>
+     <a href="#http://purl.org/dc/terms/date" title="http://purl.org/dc/terms/date">Date</a> <sup class="type-dp" title="data property">dp</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2000/01/rdf-schema#Literal" target="_blank" title="http://www.w3.org/2000/01/rdf-schema#Literal">Literal</a>
+    </dd>
+    <dt>
+     is also defined as
+    </dt>
+    <dd>
+     <a href="#http://purl.org/dc/terms/dateAccepted">annotation property</a>, <a href="#http://purl.org/dc/terms/dateAccepted">named individual</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="http://purl.org/dc/terms/available">
+  <h3>Date Available<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://purl.org/dc/terms/available</p>
+  <div class="description">
+   <dl>
+    <dt>
+     has super-properties
+    </dt>
+    <dd>
+     <a href="#http://purl.org/dc/terms/date" title="http://purl.org/dc/terms/date">Date</a> <sup class="type-dp" title="data property">dp</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2000/01/rdf-schema#Literal" target="_blank" title="http://www.w3.org/2000/01/rdf-schema#Literal">Literal</a>
+    </dd>
+    <dt>
+     is also defined as
+    </dt>
+    <dd>
+     <a href="#http://purl.org/dc/terms/available">annotation property</a>, <a href="#http://purl.org/dc/terms/available">named individual</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="http://purl.org/dc/terms/dateCopyrighted">
+  <h3>Date Copyrighted<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://purl.org/dc/terms/dateCopyrighted</p>
+  <div class="description">
+   <dl>
+    <dt>
+     has super-properties
+    </dt>
+    <dd>
+     <a href="#http://purl.org/dc/terms/date" title="http://purl.org/dc/terms/date">Date</a> <sup class="type-dp" title="data property">dp</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2000/01/rdf-schema#Literal" target="_blank" title="http://www.w3.org/2000/01/rdf-schema#Literal">Literal</a>
+    </dd>
+    <dt>
+     is also defined as
+    </dt>
+    <dd>
+     <a href="#http://purl.org/dc/terms/dateCopyrighted">annotation property</a>, <a href="#http://purl.org/dc/terms/dateCopyrighted">named individual</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="http://purl.org/dc/terms/created">
+  <h3>Date Created<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://purl.org/dc/terms/created</p>
+  <div class="description">
+   <dl>
+    <dt>
+     has super-properties
+    </dt>
+    <dd>
+     <a href="#http://purl.org/dc/terms/date" title="http://purl.org/dc/terms/date">Date</a> <sup class="type-dp" title="data property">dp</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2000/01/rdf-schema#Literal" target="_blank" title="http://www.w3.org/2000/01/rdf-schema#Literal">Literal</a>
+    </dd>
+    <dt>
+     is also defined as
+    </dt>
+    <dd>
+     <a href="#http://purl.org/dc/terms/created">annotation property</a>, <a href="#http://purl.org/dc/terms/created">named individual</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="http://purl.org/dc/terms/issued">
+  <h3>Date Issued<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://purl.org/dc/terms/issued</p>
+  <div class="description">
+   <dl>
+    <dt>
+     has super-properties
+    </dt>
+    <dd>
+     <a href="#http://purl.org/dc/terms/date" title="http://purl.org/dc/terms/date">Date</a> <sup class="type-dp" title="data property">dp</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2000/01/rdf-schema#Literal" target="_blank" title="http://www.w3.org/2000/01/rdf-schema#Literal">Literal</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="http://purl.org/dc/terms/issued">
+  <h3>Date Issued<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://purl.org/dc/terms/issued</p>
+ </div>
+ <div class="entity" id="http://purl.org/dc/terms/modified">
+  <h3>Date Modified<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://purl.org/dc/terms/modified</p>
+  <div class="description">
+   <dl>
+    <dt>
+     has super-properties
+    </dt>
+    <dd>
+     <a href="#http://purl.org/dc/terms/date" title="http://purl.org/dc/terms/date">Date</a> <sup class="type-dp" title="data property">dp</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2000/01/rdf-schema#Literal" target="_blank" title="http://www.w3.org/2000/01/rdf-schema#Literal">Literal</a>
+    </dd>
+    <dt>
+     is also defined as
+    </dt>
+    <dd>
+     <a href="#http://purl.org/dc/terms/modified">named individual</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="http://purl.org/dc/terms/dateSubmitted">
+  <h3>Date Submitted<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://purl.org/dc/terms/dateSubmitted</p>
+  <div class="description">
+   <dl>
+    <dt>
+     has super-properties
+    </dt>
+    <dd>
+     <a href="#http://purl.org/dc/terms/date" title="http://purl.org/dc/terms/date">Date</a> <sup class="type-dp" title="data property">dp</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2000/01/rdf-schema#Literal" target="_blank" title="http://www.w3.org/2000/01/rdf-schema#Literal">Literal</a>
+    </dd>
+    <dt>
+     is also defined as
+    </dt>
+    <dd>
+     <a href="#http://purl.org/dc/terms/dateSubmitted">annotation property</a>, <a href="#http://purl.org/dc/terms/dateSubmitted">named individual</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="http://purl.org/dc/terms/valid">
+  <h3>Date Valid<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://purl.org/dc/terms/valid</p>
+  <div class="description">
+   <dl>
+    <dt>
+     has super-properties
+    </dt>
+    <dd>
+     <a href="#http://purl.org/dc/terms/date" title="http://purl.org/dc/terms/date">Date</a> <sup class="type-dp" title="data property">dp</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2000/01/rdf-schema#Literal" target="_blank" title="http://www.w3.org/2000/01/rdf-schema#Literal">Literal</a>
+    </dd>
+    <dt>
+     is also defined as
+    </dt>
+    <dd>
+     <a href="#http://purl.org/dc/terms/valid">annotation property</a>, <a href="#http://purl.org/dc/terms/valid">named individual</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="hasDefectType">
+  <h3>Defect type<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/rdo#hasDefectType</p>
+  <div class="comment">
+   <span class="markdown">This data property specifies the type of defect identified for a Classified Damage during roof inspection. The defect types are expressed as descriptive values rather than modelled as individuals. They reflect inspection outcomes and expert interpretation. Typical defect types include: Slate Biological Growth (subclass of Classified Damage): – algae: thin biological growth typically associated with surface moisture and damp environmental conditions; – lichen: slow-growing biological organisms indicating long-term environmental exposure; – moss: thicker biological growth that retains moisture and may contribute to accelerated material deterioration. Slate Structural Defect (subclass of Classified Damage): – broken slate: cracked or fractured slate that may allow water penetration; – displaced slate: slate that has moved from its original position, potentially compromising weather tightness; – missing slate: complete absence of a slate, directly exposing underlying roof layers. The listed defect types are illustrative and not intended to form an exhaustive taxonomy.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="https://w3id.org/dot#ClassifiedDamage" target="_blank" title="https://w3id.org/dot#ClassifiedDamage">Classified Damage</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#string" target="_blank" title="http://www.w3.org/2001/XMLSchema#string">string</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="environmental_and_climate_context">
+  <h3>environmental and climate context<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/rdo#environmental_and_climate_context</p>
+  <div class="comment">
+   <span class="markdown">A grouping property for environmental and climatic context attributes that provide background conditions for roof inspection and condition assessment. These contextual properties do not describe individual defects or components directly, but support interpretation of observed deterioration patterns, moisture-related issues, and long-term weathering behaviour across the building. This property is currently modelled as a simplified, free-text attribute and may be replaced in future work by links to dedicated weather and climate ontologies or external data sources (e.g. weather APIs and ontologies such as https://bimerr.iot.linkeddata.es/def/weather/), enabling more structured and time-specific representations.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has sub-properties
+    </dt>
+    <dd>
+     <a href="#climate_context" title="https://w3id.org/rdo#climate_context">climate context</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#environmental_context" title="https://w3id.org/rdo#environmental_context">environmental context</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#exposure_level" title="https://w3id.org/rdo#exposure_level">exposure level</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#orientation" title="https://w3id.org/rdo#orientation">orientation</a> <sup class="type-dp" title="data property">dp</sup>, <a href="#relative_position" title="https://w3id.org/rdo#relative_position">relative position</a> <sup class="type-dp" title="data property">dp</sup>
+    </dd>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="https://w3id.org/dot#Damage" target="_blank" title="https://w3id.org/dot#Damage">Damage</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#string" target="_blank" title="http://www.w3.org/2001/XMLSchema#string">string</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="environmental_context">
+  <h3>environmental context<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/rdo#environmental_context</p>
+  <div class="comment">
+   <span class="markdown">Describes the surrounding environmental setting of the building (e.g., urban, rural, coastal), representing site-level conditions shared by all roof elements. Environmental context helps inspectors interpret observed conditions, such as pollution-related soiling, vegetation growth, or persistent moisture, rather than serving as a direct indicator of defect presence.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has super-properties
+    </dt>
+    <dd>
+     <a href="#environmental_and_climate_context" title="https://w3id.org/rdo#environmental_and_climate_context">environmental and climate context</a> <sup class="type-dp" title="data property">dp</sup>
+    </dd>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="https://schema.org/Product" target="_blank" title="https://schema.org/Product">Product</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#string" target="_blank" title="http://www.w3.org/2001/XMLSchema#string">string</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="exposure_level">
+  <h3>exposure level<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/rdo#exposure_level</p>
+  <div class="comment">
+   <span class="markdown">Characterises the degree to which a pitch is exposed to weathering forces (e.g., sheltered or exposed). Exposure level influences the likelihood of wind-driven rain penetration, accelerated weathering of materials, and deterioration at junctions, but does not alone determine the presence or severity of defects.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has super-properties
+    </dt>
+    <dd>
+     <a href="#environmental_and_climate_context" title="https://w3id.org/rdo#environmental_and_climate_context">environmental and climate context</a> <sup class="type-dp" title="data property">dp</sup>
+    </dd>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#http://webprotege.stanford.edu/RCsOXjQhDvzdCqC92ncCBu" title="http://webprotege.stanford.edu/RCsOXjQhDvzdCqC92ncCBu">Roof Pitch</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#string" target="_blank" title="http://www.w3.org/2001/XMLSchema#string">string</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="http://purl.org/dc/terms/identifier">
+  <h3>Identifier<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://purl.org/dc/terms/identifier</p>
+  <div class="description">
+   <dl>
+    <dt>
+     has sub-properties
+    </dt>
+    <dd>
+     <a href="#http://purl.org/dc/terms/bibliographicCitation" title="http://purl.org/dc/terms/bibliographicCitation">Bibliographic Citation</a> <sup class="type-dp" title="data property">dp</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2000/01/rdf-schema#Literal" target="_blank" title="http://www.w3.org/2000/01/rdf-schema#Literal">Literal</a>
+    </dd>
+    <dt>
+     is also defined as
+    </dt>
+    <dd>
+     <a href="#http://purl.org/dc/terms/identifier">annotation property</a>, <a href="#http://purl.org/dc/terms/identifier">named individual</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="junction_context">
+  <h3>junction context<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/rdo#junction_context</p>
+  <div class="comment">
+   <span class="markdown">A description of whether and how a damage is associated with a junction. This property is used to record junction-related context that is difficult to capture purely geometrically, such as “junction between slate and leadwork (material junction)” or “junction between roof and masonry (element junction)”. Junction information supports interpretation of likely failure mechanisms and potential water ingress pathways.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="https://w3id.org/dot#Damage" target="_blank" title="https://w3id.org/dot#Damage">Damage</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#string" target="_blank" title="http://www.w3.org/2001/XMLSchema#string">string</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="junction_type">
+  <h3>junction type<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/rdo#junction_type</p>
+  <div class="comment">
+   <span class="markdown">Indicates the junction category relevant to the damage (e.g., material junction or element junction). This supports consistent reporting and querying of junction-related failures.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has super-properties
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2002/07/owl#topDataProperty" target="_blank" title="http://www.w3.org/2002/07/owl#topDataProperty">top Data Property</a> <sup class="type-dp" title="data property">dp</sup>
+    </dd>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="https://w3id.org/dot#Damage" target="_blank" title="https://w3id.org/dot#Damage">Damage</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#string" target="_blank" title="http://www.w3.org/2001/XMLSchema#string">string</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="orientation">
+  <h3>orientation<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/rdo#orientation</p>
+  <div class="comment">
+   <span class="markdown">Represents the facing direction (aspect) of a pitch (e.g., cardinal direction or azimuth). Orientation is pitch-specific and supports interpretation of differential moisture retention, biological growth, and weathering patterns observed during inspection, particularly where multiple pitches on the same roof exhibit different deterioration behaviours.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has super-properties
+    </dt>
+    <dd>
+     <a href="#environmental_and_climate_context" title="https://w3id.org/rdo#environmental_and_climate_context">environmental and climate context</a> <sup class="type-dp" title="data property">dp</sup>
+    </dd>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#http://webprotege.stanford.edu/RCsOXjQhDvzdCqC92ncCBu" title="http://webprotege.stanford.edu/RCsOXjQhDvzdCqC92ncCBu">Roof Pitch</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#string" target="_blank" title="http://www.w3.org/2001/XMLSchema#string">string</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="pitch_angle">
+  <h3>Pitch angle<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/rdo#pitch_angle</p>
+  <div class="comment">
+   <span class="markdown">Pitch angle is a numerical value (expressed in degrees) representing the inclination of a roof surface. This property uses a decimal value to allow precise measurement. Indicative threshold ranges may be applied for roof characterisation: pitch angles below 10° typically indicate flat roofs; values between 10° and 45° represent low-pitched roofs; and angles greater than 45° indicate steeply pitched roofs. Variations in pitch angle influence drainage behaviour, exposure conditions, defect susceptibility, and inspection and maintenance considerations.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#http://webprotege.stanford.edu/RCsOXjQhDvzdCqC92ncCBu" title="http://webprotege.stanford.edu/RCsOXjQhDvzdCqC92ncCBu">Roof Pitch</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#decimal" target="_blank" title="http://www.w3.org/2001/XMLSchema#decimal">decimal</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="relative_position">
+  <h3>relative position<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/rdo#relative_position</p>
+  <div class="comment">
+   <span class="markdown">Specifies the relative position of a pitch within the overall roof configuration (e.g., upper pitch or lower pitch). Relative position is important for inspection interpretation, as lower pitches may receive runoff, debris, or moisture from higher pitches, and are often associated with junction-related issues and concealed water ingress pathways.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has super-properties
+    </dt>
+    <dd>
+     <a href="#environmental_and_climate_context" title="https://w3id.org/rdo#environmental_and_climate_context">environmental and climate context</a> <sup class="type-dp" title="data property">dp</sup>
+    </dd>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#http://webprotege.stanford.edu/RCsOXjQhDvzdCqC92ncCBu" title="http://webprotege.stanford.edu/RCsOXjQhDvzdCqC92ncCBu">Roof Pitch</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#string" target="_blank" title="http://www.w3.org/2001/XMLSchema#string">string</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="hasRepairStatus">
+  <h3>repair status<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/rdo#hasRepairStatus</p>
+  <div class="comment">
+   <span class="markdown">Represents the observed or inferred repair status of a damage instance relative to the latest available inspection results, and where applicable, comparisons across multiple inspections. The status reflects the current observation-based interpretation and does not necessarily indicate the existence of an explicit repair record. Typical values include: - "active": The damage is explicitly detected and confirmed to be present in the latest inspection. - "not_observed": The damage is not detected in the latest inspection. This does not imply that the damage has been repaired, as the absence may be due to occlusion, limited visibility, data quality issues, or detection uncertainty. - "likely_repaired": Based on comparisons across multiple inspections, there is strong observational evidence suggesting that the damage may have been repaired; however, no explicit repair record or confirmation is available. - "confirmed_repaired": The damage is considered repaired based on explicit confirmation, such as a repair record, maintenance documentation, or expert validation. This status indicates recorded confirmation rather than purely observation-based inference.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="https://w3id.org/dot#ClassifiedDamage" target="_blank" title="https://w3id.org/dot#ClassifiedDamage">Classified Damage</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#string" target="_blank" title="http://www.w3.org/2001/XMLSchema#string">string</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="hasResolution">
+  <h3>resolution<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/rdo#hasResolution</p>
+  <div class="comment">
+   <span class="markdown">The resolution of the orthophoto, representing the size of each pixel in meters. For example, a value of "0.005" means each pixel represents 5mm by 5mm.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="#Image" title="https://w3id.org/rdo#Image">Image</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#decimal" target="_blank" title="http://www.w3.org/2001/XMLSchema#decimal">decimal</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="roof_build_up">
+  <h3>Roof build-up<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/rdo#roof_build_up</p>
+  <div class="comment">
+   <span class="markdown">A description of the roof build-up (construction make-up), capturing the main roof-related elements and underlying materials relevant to condition assessment. This may include slates, ridge coverings, mortar fillets at wall abutments, lead flashings, wallhead/parapet gutters, chimney stacks, associated stonework/brickwork, and underlying layers such as masonry, lead, mortar, sarking/timber, or flat-roofing materials. This property is intended to record practical construction knowledge often missing from BIM models and to support interpretation of junction-related defects and water ingress mechanisms.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has super-properties
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2002/07/owl#topDataProperty" target="_blank" title="http://www.w3.org/2002/07/owl#topDataProperty">top Data Property</a> <sup class="type-dp" title="data property">dp</sup>
+    </dd>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="https://pi.pauwel.be/voc/buildingelement#Roof" target="_blank" title="https://pi.pauwel.be/voc/buildingelement#Roof">Roof</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2001/XMLSchema#string" target="_blank" title="http://www.w3.org/2001/XMLSchema#string">string</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="http://purl.org/dc/terms/title">
+  <h3>Title<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> http://purl.org/dc/terms/title</p>
+  <div class="description">
+   <dl>
+    <dt>
+     has sub-properties
+    </dt>
+    <dd>
+     <a href="#http://purl.org/dc/terms/alternative" title="http://purl.org/dc/terms/alternative">Alternative Title</a> <sup class="type-dp" title="data property">dp</sup>
+    </dd>
+    <dt>
+     has range
+    </dt>
+    <dd>
+     <a href="http://www.w3.org/2000/01/rdf-schema#Literal" target="_blank" title="http://www.w3.org/2000/01/rdf-schema#Literal">Literal</a>
+    </dd>
+    <dt>
+     is also defined as
+    </dt>
+    <dd>
+     <a href="#http://purl.org/dc/terms/title">named individual</a>
+    </dd>
+   </dl>
+  </div>
+ </div>
+ <div class="entity" id="hasX">
+  <h3>xyz<sup class="type-dp" title="data property">dp</sup> <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a> </span></h3>
+  <p><strong>IRI:</strong> https://w3id.org/rdo#hasX</p>
+  <div class="comment">
+   <span class="markdown">The XYZ coordinate of a damage instance, expressed in the same spatial reference system as the associated survey or orthophoto.</span>
+  </div>
+  <div class="description">
+   <dl>
+    <dt>
+     has domain
+    </dt>
+    <dd>
+     <a href="https://w3id.org/dot#Damage" target="_blank" title="https://w3id.org/dot#Damage">Damage</a> <sup class="type-c" title="class">c</sup>
+    </dd>
+   </dl>
+  </div>
+ </div>
+</div><div id="legend">
+<h2>Legend <span class="backlink"> back to <a href="#toc">ToC</a></span></h2>
+<div   class="entity">
+<sup class="type-c" title="Classes">c</sup>: Classes <br/>
+<sup class="type-op" title="Object Properties">op</sup>: Object Properties <br/>
+<sup class="type-dp" title="Data Properties">dp</sup>: Data Properties <br/>
+<sup class="type-ni" title="Named Individuals">ni</sup>: Named Individuals <br/>
+<sup class="type-ep" title="External Properties">ep</sup>: External Properties
+</div>
+</div>
+</div>
+    
+
+<!--REFERENCES SECTION-->
+  <div id="references">
+<h2 id="ref" class="list">References <span class="backlink"> back to <a href="#toc">ToC</a></span></h2>
+<span class="markdown">
+Add your references here. It is recommended to have them as a list.</span>
+
+</div>
+<div id="acknowledgments">
+<h2 id="ack" class="list">Acknowledgments <span class="backlink"> back to <a href="#toc">ToC</a></span></h2>
+<p>
+The authors would like to thank <a href="http://www.essepuntato.it/">Silvio Peroni</a> for developing <a href="http://www.essepuntato.it/lode">LODE</a>, a Live OWL Documentation Environment, which is used for representing the Cross Referencing Section of this document and <a href="https://w3id.org/people/dgarijo">Daniel Garijo</a> for developing <a href="https://github.com/dgarijo/Widoco">Widoco</a>, the program used to create the template used in this documentation.</p>
+</div>
+
+
+</div>
+</body>
+</html>
